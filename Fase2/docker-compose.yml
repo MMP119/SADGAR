@@ -1,0 +1,51 @@
+services:
+  db-master:
+    image: postgres:16-alpine
+    container_name: postgres_master
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=Bases2_G10
+      - POSTGRES_DB=IMDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./config/master/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./config/master/pg_hba.conf:/etc/postgresql/pg_hba.conf
+      - ./config/master/init-master.sh:/docker-entrypoint-initdb.d/init-master.sh
+      - master_data:/var/lib/postgresql/data
+      - backups:/backups
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf -c hba_file=/etc/postgresql/pg_hba.conf
+
+  db-slave:
+    image: postgres:16-alpine
+    container_name: postgres_slave
+    restart: unless-stopped
+    depends_on:
+      - db-master
+    environment:
+      - POSTGRES_PASSWORD=Bases2_G10
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./config/slave/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./config/slave/pg_hba.conf:/etc/postgresql/pg_hba.conf
+      - ./config/slave/init-slave.sh:/docker-entrypoint-initdb.d/init-slave.sh
+      - slave_data:/var/lib/postgresql/data
+      - backups:/backups
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf -c hba_file=/etc/postgresql/pg_hba.conf
+
+  app:
+    build: ./app
+    container_name: python_app
+    restart: unless-stopped
+    depends_on:
+      - db-master
+    volumes:
+      - ./app:/app
+    command: tail -f /dev/null
+
+volumes:
+  master_data:
+  slave_data:
+  backups: {}
