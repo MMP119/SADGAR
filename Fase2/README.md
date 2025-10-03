@@ -2,6 +2,7 @@
 
 ## Organización
 
+```
 bases2/
 ├── app/
 │   ├── scripts/
@@ -20,6 +21,7 @@ bases2/
 └── BaseIMDb.sql
 └── ProcedimientosAlmacenados.sql
 └── mi_backup_completo.sql.gz
+```
 
 
 ## Comandos
