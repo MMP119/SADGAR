@@ -22,7 +22,7 @@ bases2/
 └── ProcedimientosAlmacenados.sql
 └── mi_backup_completo.sql.gz
 ```
-
+---
 
 ## Comandos
 
@@ -57,3 +57,30 @@ bash app/scripts/failback.sh
 ```
 
 -----
+
+## Ejecutar Backups
+
+### Checar si redis está funcionando
+
+```bash
+bash app/scripts/backups/check_redis.sh
+```
+
+### Ejecutar Script Backup día 1
+
+```bash
+bash app/scripts/backups/dia1.sh 
+```
+
+### Ejecución de Scripts Backup día específico (1-6)
+
+```bash
+bash app/scripts/backups/dia#.sh 
+```
+
+### Ver Backups en Redis:
+
+```bash
+bash app/scripts/backups/ver_backups.sh
+```
+---

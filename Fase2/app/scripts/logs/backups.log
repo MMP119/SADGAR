@@ -1,0 +1,48 @@
+[2025-10-04 22:56:26] --- DÍA 1: Backup COMPLETO ---
+[2025-10-04 22:56:26] Iniciando backup completo → /root/bases2/backups/completo/backup_completo_2025-10-04_22-56-26.sql.gz
+[2025-10-04 22:56:27] Backup completo finalizado correctamente.
+[2025-10-04 22:56:27] --- DÍA 1 finalizado correctamente ---
+[2025-10-04 23:05:34] --- DÍA 1: Backup COMPLETO ---
+[2025-10-04 23:05:34] Contenedor maestro detectado: db-master
+[2025-10-04 23:05:34] Iniciando backup completo → /root/bases2/backups/completo/backup_completo_2025-10-04_23-05-34.sql.gz
+[2025-10-04 23:05:35] Backup completo finalizado correctamente.
+[2025-10-04 23:05:35] --- DÍA 1 finalizado correctamente ---
+[2025-10-04 23:09:01] --- DÍA 1: Backup COMPLETO ---
+[2025-10-04 23:09:01] Contenedor maestro detectado: postgres_master
+[2025-10-04 23:09:01] Iniciando backup completo → /root/bases2/backups/completo/backup_completo_2025-10-04_23-09-01.sql.gz
+[2025-10-04 23:14:43] Backup completo finalizado correctamente.
+[2025-10-04 23:14:43] --- DÍA 1 finalizado correctamente ---
+[2025-10-04 23:19:49] --- DÍA 2: Backup INCREMENTAL ---
+[2025-10-04 23:19:49] Contenedor maestro detectado: postgres_master
+[2025-10-04 23:19:49] Iniciando backup incremental → /root/bases2/backups/incremental/backup_incremental_2025-10-04_23-19-49.sql.gz
+[2025-10-04 23:19:50] Backup incremental finalizado correctamente.
+[2025-10-04 23:19:50] --- DÍA 2 finalizado correctamente ---
+[2025-10-04 23:21:06] --- DÍA 3: Backup INCREMENTAL + DIFERENCIAL ---
+[2025-10-04 23:21:06] Contenedor maestro detectado: postgres_master
+[2025-10-04 23:21:06] Iniciando backup incremental → /root/bases2/backups/incremental/backup_incremental_2025-10-04_23-21-06.sql.gz
+[2025-10-04 23:21:06] Backup incremental finalizado correctamente.
+[2025-10-04 23:21:06] Contenedor maestro detectado: postgres_master
+[2025-10-04 23:21:06] Iniciando backup diferencial → /root/bases2/backups/diferencial/backup_diferencial_2025-10-04_23-21-06.tar
+[2025-10-04 23:21:07] Backup diferencial finalizado correctamente.
+[2025-10-04 23:21:07] --- DÍA 3 finalizado correctamente ---
+[2025-10-04 23:27:15] --- DÍA 4: Backup INCREMENTAL ---
+[2025-10-04 23:27:15] Contenedor maestro detectado: postgres_master
+[2025-10-04 23:27:15] Iniciando backup incremental → /root/bases2/backups/incremental/backup_incremental_2025-10-04_23-27-15.sql.gz
+[2025-10-04 23:27:16] Backup incremental finalizado correctamente.
+[2025-10-04 23:27:16] --- DÍA 4 finalizado correctamente ---
+[2025-10-04 23:27:33] --- DÍA 5: Backup INCREMENTAL + DIFERENCIAL ---
+[2025-10-04 23:27:33] Contenedor maestro detectado: postgres_master
+[2025-10-04 23:27:33] Iniciando backup incremental → /root/bases2/backups/incremental/backup_incremental_2025-10-04_23-27-33.sql.gz
+[2025-10-04 23:27:34] Backup incremental finalizado correctamente.
+[2025-10-04 23:27:34] Contenedor maestro detectado: postgres_master
+[2025-10-04 23:27:34] Iniciando backup diferencial → /root/bases2/backups/diferencial/backup_diferencial_2025-10-04_23-27-33.tar
+[2025-10-04 23:27:35] Backup diferencial finalizado correctamente.
+[2025-10-04 23:27:35] --- DÍA 5 finalizado correctamente ---
+[2025-10-04 23:27:55] --- DÍA 6: Backup DIFERENCIAL + COMPLETO ---
+[2025-10-04 23:27:55] Contenedor maestro detectado: postgres_master
+[2025-10-04 23:27:55] Iniciando backup diferencial → /root/bases2/backups/diferencial/backup_diferencial_2025-10-04_23-27-55.tar
+[2025-10-04 23:27:56] Backup diferencial finalizado correctamente.
+[2025-10-04 23:27:56] Contenedor maestro detectado: postgres_master
+[2025-10-04 23:27:56] Iniciando backup completo → /root/bases2/backups/completo/backup_completo_2025-10-04_23-27-55.sql.gz
+[2025-10-04 23:33:25] Backup completo finalizado correctamente.
+[2025-10-04 23:33:25] --- DÍA 6 finalizado correctamente ---
