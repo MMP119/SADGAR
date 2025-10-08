@@ -42,6 +42,9 @@ bases2/
 
 Esta es la secuencia que se debe ejecutar desde un estado limpio.
 
+---
+# NOTA: ESTOS COMANDOS SOLO DEBEN EJECUTARSE SI SE QUIERE BORRAR TODO Y CARGAR DESDE CERO TODO EL PROYECTO, NO RECOMENDABLE HACER
+
 **1. Limpieza Total y Arranque:**
 
 ```bash
@@ -55,6 +58,8 @@ Restaura el backup original en el maestro..
 ```bash
 gunzip < mi_backup_completo.sql.gz | docker compose exec -T -e PGPASSWORD=Bases2_G10 db-master psql -U root -d IMDb
 ```
+
+---
 
 **3. Ejecutar Failover:**
 
@@ -102,6 +107,12 @@ bash app/scripts/backups/ver_backups.sh
 ## Ejecutar API
 
 ### NOTA: Asegurarse de estar dentro de app/scripts e iniciar la API
+
+### Activar entorno virtual
+
+```bash
+source venv_api/bin/activate
+```
 
 ### Poner en marcha la API
 
