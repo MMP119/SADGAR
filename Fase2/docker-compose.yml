@@ -35,17 +35,43 @@ services:
       - backups:/backups
     command: postgres -c config_file=/etc/postgresql/postgresql.conf -c hba_file=/etc/postgresql/pg_hba.conf
 
-  app:
-    build: ./app
-    container_name: python_app
+  pgbackrest:
+    image: woblerr/pgbackrest:latest
+    container_name: pgbackrest
     restart: unless-stopped
+    environment:
+      - PGUSER=root
+      - PGPASSWORD=Bases2_G10
+    volumes:
+      - backups:/backups
+      - master_data:/var/lib/postgresql/master:ro
+      - slave_data:/var/lib/postgresql/slave:ro
     depends_on:
       - db-master
+      - db-slave
+    entrypoint: ["tail", "-f", "/dev/null"]  # mantiene el contenedor vivo para ejecutar comandos
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis_backup
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
     volumes:
-      - ./app:/app
-    command: tail -f /dev/null
+      - redis_data:/data
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis_commander
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
 
 volumes:
   master_data:
   slave_data:
-  backups: {}
+  backups:
+  redis_data:
