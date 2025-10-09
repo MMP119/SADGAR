@@ -1,20 +1,6 @@
 # MANUAL DE USUARIO
 ## Sistema de Replicación PostgreSQL con Alta Disponibilidad
 
----
-
-##  Tabla de Contenidos
-
-1. [Introducción](#introducción)
-2. [Requisitos Previos](#requisitos-previos)
-3. [Instalación Inicial](#instalación-inicial)
-4. [Ejecución de la API de Control](#ejecución-de-la-api-de-control)
-5. [Operaciones Principales](#operaciones-principales)
-6. [Verificación del Sistema](#verificación-del-sistema)
-7. [Gestión de Backups](#gestión-de-backups)
-8. [Solución de Problemas](#solución-de-problemas)
-
----
 
 ## Introducción
 
@@ -60,7 +46,6 @@ cd /ruta/al/proyecto/Fase2
 
 ### Paso 2: Estructura del proyecto
 
-![Estructura del Proyecto](./imagenes/estructura_proyecto.png)
 
 El proyecto tiene la siguiente organización:
 
@@ -78,25 +63,6 @@ Fase2/
 └── docker-compose.yml
 ```
 
-### Paso 3: Iniciar los contenedores
-
-Para iniciar todo el sistema, ejecuta:
-
-```bash
-docker-compose up -d
-```
-
-![Iniciar Contenedores](./imagenes/docker_compose_up.png)
-
-Verifica que todos los contenedores estén corriendo:
-
-```bash
-docker-compose ps
-```
-
-![Estado de Contenedores](./imagenes/docker_ps.png)
-
----
 
 ## Ejecución de la API de Control
 
@@ -209,55 +175,6 @@ curl -X POST http://127.0.0.1:8088/failback
 }
 ```
 
----
-
-## Verificación del Sistema
-
-### Verificar estado de replicación
-
-Conéctate al servidor maestro:
-
-```bash
-docker exec -it postgres_master psql -U postgres
-```
-
-Ejecuta la siguiente consulta:
-
-```sql
-SELECT * FROM pg_stat_replication;
-```
-
-![Estado de Replicación](./imagenes/estado_replicacion.png)
-
-### Verificar rol de los servidores
-
-Para saber si un servidor es maestro o esclavo:
-
-```sql
-SELECT pg_is_in_recovery();
-```
-
-- **false**: El servidor es maestro
-- **true**: El servidor es esclavo
-
-![Verificar Rol](./imagenes/verificar_rol.png)
-
-### Verificar lag de replicación
-
-```sql
-SELECT 
-    application_name,
-    client_addr,
-    state,
-    sync_state,
-    replay_lag
-FROM pg_stat_replication;
-```
-
-![Lag de Replicación](./imagenes/lag_replicacion.png)
-
----
-
 ## Gestión de Backups
 
 ### Sistema de backups automáticos
@@ -267,6 +184,11 @@ El sistema realiza backups diarios automáticamente:
 - **Día 1**: Backup completo
 - **Días 2-6**: Backups incrementales
 
+se puede visualizar la ejecucion de un backup incremental y diferencial
+
+![Backup incremental y diferencial](./img/cinco.jpeg)
+
+
 ### Verificar backups realizados
 
 Los backups se almacenan en:
@@ -275,7 +197,7 @@ Los backups se almacenan en:
 ls -lh /ruta/al/proyecto/Fase2/backups/
 ```
 
-![Lista de Backups](./imagenes/lista_backups.png)
+![Lista de Backups](./img/siete.jpeg)
 
 ### Consultar metadatos en Redis
 
@@ -291,7 +213,7 @@ Ver todas las claves de backups:
 KEYS backup:*
 ```
 
-![Redis Backups](./imagenes/redis_backups.png)
+![Redis Backups](./img/seis.jpeg)
 
 Ver información de un backup específico:
 
@@ -299,100 +221,9 @@ Ver información de un backup específico:
 HGETALL backup:completo:2025-10-08
 ```
 
-### Restaurar un backup
-
-Para restaurar un backup completo:
-
-```bash
-# Detener el servidor
-docker-compose stop postgres_master
-
-# Restaurar el backup
-docker exec -i postgres_master psql -U postgres < /backups/backup_completo_20251008.sql.gz
-
-# Reiniciar el servidor
-docker-compose start postgres_master
-```
-
-![Restaurar Backup](./imagenes/restaurar_backup.png)
 
 ---
 
-## Solución de Problemas
-
-### Problema 1: La API no inicia
-
-**Síntoma**: Error al ejecutar `uvicorn api_control:app`
-
-**Solución**:
-
-```bash
-# Verificar que estás en el directorio correcto
-pwd
-# Debe mostrar: /ruta/al/proyecto/Fase2/app/scripts
-
-# Verificar que el entorno virtual está activado
-which python
-# Debe mostrar: /ruta/al/venv_api/bin/python
-
-# Reinstalar dependencias
-pip install fastapi uvicorn
-```
-
-### Problema 2: Failover falla
-
-**Síntoma**: El comando failover retorna error
-
-**Solución**:
-
-```bash
-# Verificar logs del script
-cat /app/scripts/logs/failover.log
-
-# Verificar estado de los contenedores
-docker-compose ps
-
-# Reiniciar contenedores si es necesario
-docker-compose restart
-```
-
-![Logs de Error](./imagenes/logs_error.png)
-
-### Problema 3: Lag de replicación alto
-
-**Síntoma**: El `replay_lag` es mayor a 5 segundos
-
-**Solución**:
-
-```bash
-# Verificar recursos del sistema
-docker stats
-
-# Verificar conexión de red entre contenedores
-docker exec postgres_master ping postgres_slave
-
-# Revisar configuración de WAL
-docker exec postgres_master cat /var/lib/postgresql/data/postgresql.conf | grep wal
-```
-
-### Problema 4: Backup no se ejecuta
-
-**Síntoma**: No hay backups nuevos en el directorio
-
-**Solución**:
-
-```bash
-# Verificar logs de backups
-cat /app/scripts/logs/backups.log
-
-# Ejecutar backup manualmente
-docker exec -it postgres_master /app/scripts/backups/dia1.sh
-
-# Verificar permisos del directorio
-ls -la /backups/
-```
-
----
 
 ## Comandos Útiles de Referencia
 
@@ -442,11 +273,3 @@ FLUSHALL
 ```
 
 ---
-
-## Contacto y Soporte
-
-Para problemas o consultas adicionales, contacta al equipo de soporte técnico o consulta la documentación técnica completa.
-
-**Versión del Manual**: 1.0  
-**Fecha**: Octubre 2025  
-**Proyecto**: Fase 2 - Sistema de Replicación PostgreSQL con HA
