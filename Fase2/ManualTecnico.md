@@ -506,26 +506,23 @@ La API REST proporciona endpoints para:
 
 El proyecto fue desarrollado por un equipo de 3 estudiantes con la siguiente distribución de responsabilidades y porcentajes de participación:
 
-- **Estudiante 1 (Arquitectura y Backend)** - 40%
+- **202110509 (Arquitectura y Backend)** - 50%
   - Diseño de arquitectura maestro-esclavo
   - Implementación de scripts de failover/failback
+  - Implementación del sistema de backups completo
   - Configuración de PostgreSQL y replicación
   - Desarrollo de la API REST con FastAPI
-  - Documentación técnica
-
-- **Estudiante 2 (Sistema de Backups y DevOps)** - 35%
-  - Implementación del sistema de backups completo
   - Integración con Redis para metadatos
+
+
+- **202103206 (Sistema de Backups y DevOps)** - 25%
+  - Documentación técnica
   - Configuración de Docker Compose
-  - Scripts de automatización y monitoreo
   - Testing y validación del sistema
 
-- **Estudiante 3 (Testing y Documentación)** - 25%
+- **201905152 (Documentación)** - 25%
   - Testing exhaustivo de todas las funcionalidades
-  - Documentación de usuario y manual técnico
-  - Validación de procedimientos de recuperación
-  - Configuración de ambiente de desarrollo
-  - Troubleshooting y resolución de problemas
+  - Documentación de usuario
 
 ### **Cronología del Desarrollo**
 
