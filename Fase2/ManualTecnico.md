@@ -844,9 +844,9 @@ La decisión de implementar maestro-esclavo en lugar de maestro-maestro demostr�
 
 El proyecto demostró la efectividad de una distribución equilibrada de responsabilidades:
 
-- **Estudiante 1 (40%)**: Liderazgo técnico en arquitectura y backend
-- **Estudiante 2 (35%)**: Especialización en DevOps y sistemas de backup
-- **Estudiante 3 (25%)**: Enfoque en calidad, testing y documentación
+- **202110509 (50%)**: Liderazgo técnico en arquitectura y backend
+- **202103206 (25%)**: Sistemas de backup
+- **201905152 (25%)**: Enfoque en calidad y documentación
 
 Esta distribución permitió:
 
