@@ -185,6 +185,62 @@ Salida ejemplo:
 ╚════════════════════════════════════════════════════════════════════╝
 ```
 
+#### Ver Información Completa (Redis + pgBackRest con tamaños)
+
+Para ver información consolidada de ambos sistemas:
+
+```bash
+bash pgbackrest-scripts/info_backups.sh
+```
+
+Muestra:
+- 📊 Información de pgBackRest con tamaños de cada backup
+- 💾 Espacio total usado en disco
+- 📦 Cantidad de backups por tipo (completos, incrementales, diferenciales)
+- 📋 Metadatos almacenados en Redis
+
+#### Ver Peso/Tamaño de los Backups
+
+Para ver el espacio en disco usado por los backups:
+
+```bash
+bash pgbackrest-scripts/peso_backups.sh
+```
+
+Muestra:
+- 💿 Tamaño total del repositorio de backups
+- 📦 Desglose detallado por directorio
+- 📊 Información de cada backup individual con su tamaño
+
+#### Limpiar/Eliminar Backups Antiguos
+
+Para gestionar y eliminar backups que ya no necesitas:
+
+```bash
+bash pgbackrest-scripts/limpiar_backups.sh
+```
+
+Este script interactivo ofrece:
+1. **Eliminar backups antiguos**: Mantiene solo los últimos N backups completos
+2. **Limpiar según retención**: Aplica la retención configurada (default: 2 completos)
+3. **Eliminar todos los backups**: Borra todo y reinicia (⚠️ PELIGROSO)
+4. **Ver backups actuales**: Lista antes de decidir qué eliminar
+5. **Limpiar registros huérfanos**: Elimina metadatos de Redis sin backup correspondiente
+
+**Ejemplo de uso:**
+
+```bash
+# Ejecutar el script
+bash pgbackrest-scripts/limpiar_backups.sh
+
+# Seleccionar opción 1: Mantener solo últimos 3 backups completos
+Opción: 1
+¿Cuántos backups COMPLETOS quieres mantener? (default: 2): 3
+
+# O ejecutar limpieza automática según retención actual
+Opción: 2
+```
+
 ---
 
 ### 🔄 Operaciones de Failover y Failback
