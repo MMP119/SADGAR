@@ -841,7 +841,7 @@ La decisión de implementar maestro-esclavo en lugar de maestro-maestro demostr�
 - **Mantenimiento**: Procesos estandarizados y documentados
 - **Escalabilidad**: Base sólida para crecimiento futuro
 
-## PRUEBAS DEL SISTEMAS DE BACKUPS
+## PRUEBAS DEL SISTEMA DE BACKUPS
 
 ### **Pruebas Realizadas**
 
