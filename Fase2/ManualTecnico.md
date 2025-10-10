@@ -840,6 +840,44 @@ La decisión de implementar maestro-esclavo en lugar de maestro-maestro demostr�
 - **Mantenimiento**: Procesos estandarizados y documentados
 - **Escalabilidad**: Base sólida para crecimiento futuro
 
+## PRUEBAS DEL SISTEMAS DE BACKUPS
+
+### **Pruebas Realizadas**
+
+1. **Backup Completo - Dia 1**: Verificación de creación
+![Imagen de backup completo](/Fase2/img/BackupCompleto.png)
+![Creacion](/Fase2/img/BackupDia1Completo.png)
+
+2. **Backup Incremental - Dia 2**: Verificación de creación
+![Imagen de backup incremental](/Fase2/img/BackupIncremental.png)
+![Imagen de backup incremental](/Fase2/img/BackupDia2Incremental.png)
+
+3. **Backup Incremental-Diferencial - Dia 3**: Verificación de creación
+![Imagen de backup diferencial](/Fase2/img/BackupDia3Diferencial.png)
+
+4. **Backup Incremental - Dia 4**: Verificación de creación
+![Imagen de backup incremental](/Fase2/img/BackupDia4Incremental.png)
+
+5. **Backup Incremental-Diferencial - Dia 5**: Verificación de creación
+![Imagen de backup diferencial](/Fase2/img/BackupDia5Diferencial.png)
+
+6. **Backup Diferencial-Completo - Dia 6**: Verificación de creación
+![Imagen de backup completo](/Fase2/img/BackupDia6DiferencialCompleto.png)
+
+### **Backup Registrados en Redis**
+
+![Imagen de redis](/Fase2/img/BackupRegistradosRedis.png)
+![Imagen de redis](/Fase2/img/BackupRegistradoRediss.png)
+![Imagen de redis](/Fase2/img/BackupRegistrados.png)
+
+### **Informacion De Tamaños**
+![Imagen de tamaños](/Fase2/img/InformacionTamalños.png)
+![Imagen de tamaños](/Fase2/img/InformacionTamañoss.png)
+
+### **Metadatos En Redis**
+![Metadatos en redis](/Fase2/img/MetadatosRedis.png)
+
+
 ### **Trabajo en Equipo y Aprendizajes**
 
 El proyecto demostró la efectividad de una distribución equilibrada de responsabilidades:
@@ -885,3 +923,5 @@ Este proyecto representa una implementación exitosa y completa de un sistema de
 La experiencia del equipo demuestra que es posible implementar sistemas complejos de alta disponibilidad utilizando herramientas open-source, con una metodología de desarrollo colaborativo efectiva y una documentación exhaustiva que facilita el mantenimiento y la evolución futura del sistema.
 
 **La solución proporciona una base sólida para sistemas de producción que requieren alta disponibilidad con un RTO/RPO mínimo y un sistema de backups confiable, estableciendo un estándar de calidad para futuros desarrollos en el área de bases de datos distribuidas.**
+
+
