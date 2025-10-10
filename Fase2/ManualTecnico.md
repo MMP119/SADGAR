@@ -12,6 +12,7 @@
 6. [Monitoreo y Mantenimiento](#monitoreo-y-mantenimiento)
 7. [Bitácora de Trabajo](#bitácora-de-trabajo)
 8. [Conclusiones](#conclusiones)
+9. [Pruebas del Sistema de Backups](#pruebas-del-sistema-de-backups)
 
 ## INTRODUCCIÓN
 
