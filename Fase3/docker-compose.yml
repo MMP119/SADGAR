@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb-imdb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: imdb_nosql
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - imdb-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin123
+      ME_CONFIG_MONGODB_URL: mongodb://admin:admin123@mongodb:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin123
+    ports:
+      - "8081:8081"
+    networks:
+      - imdb-network
+    depends_on:
+      - mongodb
+
+
+  loader-app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: loader-app
+    environment:
+      # MongoDB
+      MONGO_HOST: mongodb
+      MONGO_PORT: 27017
+      MONGO_DB: IMDb_NoSQL
+      MONGO_USER: admin
+      MONGO_PASSWORD: admin123
+    volumes:
+      - ./app:/app
+      - ./data:/data  
+      - ./logs:/app/logs
+    networks:
+      - imdb-network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    command: tail -f /dev/null  
+
+networks:
+  imdb-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  mongodb_config:

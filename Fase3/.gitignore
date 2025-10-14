@@ -1,0 +1,39 @@
+# Ignorar archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+data/
+
+# Entornos virtuales
+venv/
+env/
+ENV/
+
+# Logs
+logs/*.log
+*.log
+
+# Docker
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# MongoDB data
+data/db/
+data/configdb/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
