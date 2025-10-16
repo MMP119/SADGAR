@@ -1,23 +1,14 @@
-FROM python:3.11-slim
+# Usar una imagen base de Python oficial y ligera
+FROM python:3.10-slim
 
+# Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Instalar dependencias del sistema
-RUN apt-get update && apt-get install -y \
-    postgresql-client \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copiar requirements
+# Copiar el archivo de requerimientos primero para aprovechar el caché de Docker
 COPY requirements.txt .
 
-# Instalar dependencias de Python
+# Instalar las dependencias de Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar código de la aplicación
+# Copiar el resto del código de la aplicación
 COPY . .
-
-# Crear directorio de logs
-RUN mkdir -p /app/logs
-
-CMD ["tail", "-f", "/dev/null"]
